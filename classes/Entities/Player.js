@@ -30,44 +30,40 @@ export default class Player extends Character {
             }
         }, nivel);
 
-        let exemplo = {
-            timeWalkSound: 0.5,
-            levelNumber: 1,
-            vidas: 3,
-            vivo: true,
-            room: -1,
-            tesourosColetados: 0,
-            cooldownTeleporte: 1,
-            cooldownAtaque: 1,                  //Tempo do personagem travado até terminar o ataque            
-            cooldownImune: 0,
-            imune: false,
-            atributos: {
-                hpMax: 20,
-                ataque: 5,
-                // velocidade: 30,
-                velocidade: 60,
-                // velocidade: 100,
-                // velocidade: 180,
-            },
-            xpAtual: 0,
-            xpDoLevel: 100,
-            levelAtual: 1,
-            pontos: 0,
-            pontosTotais: 0,
+        this.timeWalkSound = 0.5;
+        this.levelNumber = 1;
+        this.vidas = 3;
+        this.vivo = true;
+        this.room = -1;
+        this.tesourosColetados = 0;
+        this.cooldownTeleporte = 1;
+        this.cooldownAtaque = 1;                  //Tempo do personagem travado até terminar o ataque            
+        this.cooldownImune = 0;
+        this.imune = false;
+        this.atributos = {
+            hpMax: 20,
+            ataque: 5,
+            velocidade: 30,
+            // velocidade: 60,
+        },
+        this.xpAtual = 0;
+        this.xpDoLevel = 100;
+        this.levelAtual = 1;
+        this.pontos = 0;
+        this.pontosTotais = 0;
 
-            // Ataque
-            tiro: [],
+        // Ataque
+        this.tiro = [];
 
-            // AnimationStates
-            sentidoMovimento: 0,          //0 => direita, 1 => baixo, 2 => esquerda, 3 => cima
-            atacando: 0,                  //0 => Não, 1 => Sim
-            animation: [],
-            nomeImagem: "player"
-        }
+        // AnimationStates
+        this.sentidoMovimento = 0;          //0 => direita, 1 => baixo, 2 => esquerda, 3 => cima
+        this.atacando = 0;                  //0 => Não, 1 => Sim
+        this.animation = [];
+        this.nomeImagem = "player";
 
         Object.assign(this, exemplo, params);   // Sobrescreve os atributos de params e exemplo na classe
         this.hpAtual = this.atributos.hpMax;
-        this.poderTotal = ProgressionManager.calcularPoderTotal(this.atributos, Slime.getTaxaCrescimentoAtributos());
+        this.poderTotal = ProgressionManager.calcularPoderTotal(this.atributos, this.taxasCrescimento);
         this.criarAnimacoes();
     }
 
