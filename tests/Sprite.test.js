@@ -1,4 +1,4 @@
-const Sprite = require("../classes/Sprite");
+import Sprite  from "../classes/Sprite";
 
 describe("Classe Sprite", () => {
   describe("Está corretamente criada quando: ", () => {

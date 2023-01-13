@@ -16,7 +16,7 @@ export default class Path{
           ctx.restore();
           ctx.fillStyle = "#1E90FF";
           ctx.strokeStyle = "black";
-          this.escreveTexto(ctx, (this.steps[i].notacaoTesouros), this.steps[i].coluna * s + s / 2, this.steps[i].linha * s + s / 2 + 5);
+          this.escreveTexto(ctx, (this.steps[i].notacaoTesouros), this.steps[i].coluna * s + (s * 0.3), this.steps[i].linha * s + (s * 0.8));
           if(!this.a){
             console.log("Tesouros: " + this.steps.length);
             this.a = true;
@@ -34,7 +34,7 @@ export default class Path{
           ctx.restore();
           ctx.fillStyle = "#FF4500";
           ctx.strokeStyle = "black";
-          this.escreveTexto(ctx, (this.steps[i].notacaoTesouros), this.steps[i].coluna * s + s / 2, this.steps[i].linha * s + s / 2 + 5);
+          this.escreveTexto(ctx, (this.steps[i].notacaoTesouros), this.steps[i].coluna * s + (s * 0.7), this.steps[i].linha * s + (s * 0.9));
           if(!this.a){
             console.log(this.steps.length);
             this.a = true;
@@ -52,7 +52,7 @@ export default class Path{
           ctx.restore();
           ctx.fillStyle = "red";
           ctx.strokeStyle = "black";
-          this.escreveTexto(ctx, (this.steps[i].direcaoSaida)/*(i)*/, this.steps[i].coluna * s + s / 2, this.steps[i].linha * s + s / 2);
+          this.escreveTexto(ctx, (this.steps[i].direcaoSaida)/*(i)*/, this.steps[i].coluna * s + (s * 0.7), this.steps[i].linha * s + (s * 0.9));
           if(!this.a){
             console.log("Básico: " + this.steps.length);
             this.a = true;
