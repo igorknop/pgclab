@@ -1,7 +1,13 @@
 # PGCLab
 O PGCLab é uma ferramenta desenvolvida para o estudo e aplicação de técnicas de geração procedural de conteúdo, utilizando apenas ferramentas abertas para web. Entre as principais aplicações estão os jogos digitais digitais.
 
-O PGCLab foi desenvolvido durante 2020, como um projeto da disciplina DCC104 e DCC138 e, posteriormente, como iniciação científica por [Lucas Diniz Costa](https://github.com/lucasdinizcosta) sob a orientação de [Igor Knop](https://github.com/igorknop). Em 2021 o projeto foi renomeado para PGCLab e teve o código fonte aberto sob a GPLv3.
+O PGCLab foi desenvolvido durante 2020, como um projeto da disciplina DCC104 e DCC138 e, posteriormente, como iniciação científica por [Lucas Diniz Costa](https://github.com/lucasdinizcosta) sob a orientação de [Igor Knop](https://github.com/igorknop). Em 2021 o projeto foi renomeado para PGCLab e teve o código fonte aberto sob a GPLv3 e tem sido utilizado como ambiente de estudo para vários alunos na graduação.
+
+## Trabalhos acadêmicos
+* [Diniz, L.; Knop, I. O. Geração procedural de conteúdo através de uma abordagem híbrida entre automatos celulares e heurísticas. SBGAMES. 2020.](https://www.sbgames.org/proceedings2020/WorkshopG2/209761.pdf)
+* [Santana, G.; Knop, I. O. Avaliação do Fluxo da Experiência do Jogador na Geração Procedural por Autômatos Celulares. Monografia. 2021. ](http://monografias.ice.ufjf.br/tcc-web/downloadPdf?id=559)
+* [Villa Verde, R. C.; Knop, I. O. Avaliação da geração de conteúdo por Wave Function Collapse na experiência do jogador. 2021. ](http://monografias.ice.ufjf.br/tcc-web/downloadPdf?id=572)
+* [Dima , C. V. R.; Knop, I. O. Modelagem da Progressão de Dificuldade em Jogos para Mapas Gerados Proceduralmente. 2023. ](http://monografias.ice.ufjf.br/tcc-web/downloadPdf?id=713)
 
 
 ##  Instruções de uso:
