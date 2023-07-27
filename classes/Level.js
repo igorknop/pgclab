@@ -2,13 +2,11 @@ import Map from "./Map.js";
 import Room from "./Room.js";
 import Teleporter, { TeleporterType } from "./Teleporter.js";
 import FireZone from "./FireZone.js";
-import Enemy from "./Entities/Enemy.js";
 import Treasure from "./Treasure.js";
 import Ordenacao from "./Ordenacao.js";
 import ProgressionManager from "./ProgressionManager.js";
 import Slime from "./Entities/Slime.js";
 import Debugger, { DEBUG_MODE, PATHS } from "./utils/Debugger.js";
-import { getPlayer } from "./Entities/Player.js";
 import TreasurePositioningManager from "./TreasurePositioningManager.js";
 import EnemyPositioningManager from "./EnemyPositioningManager.js";
 

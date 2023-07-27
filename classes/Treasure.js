@@ -1,6 +1,5 @@
 import Sprite from "./Sprite.js";
 import seedGen from "./SeedGen.js";
-import assetsMng from "./AssetsMng.js";
 import Debugger, { DEBUG_MODE } from "./utils/Debugger.js";
 
 
@@ -46,7 +45,7 @@ export default class Treasure extends Sprite {
     desenhar(ctx) {
         ctx.save();
         ctx.translate(this.x, this.y);
-        assetsMng.drawClip({
+        this.map.assetsMng.drawClip({
             ctx: ctx, key: this.nomeImagem,
             sx: this.animation[Math.floor(this.pose) % this.qtdAnimacoes].sx,
             sy: this.animation[Math.floor(this.pose) % this.qtdAnimacoes].sy,

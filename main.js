@@ -1,19 +1,31 @@
-import assetsMng from "./classes/AssetsMng.js";
+import AssetsManager from "./classes/AssetsManager.js";
 import { getDebugMode, setDebugMode } from "./classes/DebugMode.js";
 import { getPlayer } from "./classes/Entities/Player.js";
 import Game from "./classes/Game.js";
 import Level from "./classes/Level.js";
 import { setMapArea } from "./classes/MAPA_AREA.js";
 import SeedGenerator from "./classes/SeedGenerator.js";
-
-// import AssetsManager from "./AssetsManager.js";
-// // import Mixer from "./Mixer.js";
 import InputManager from "./classes/InputManager.js";
+//import Mixer from "./classes/Mixer.js";
+
 // import Game from "./Game.js";
 // import CenaJogo from './Cenas/CenaJogo.js'
 // import CenaMenu from './Cenas/CenaMenu.js'
 
 const tela = document.getElementById("canvas");
+// Switch to fullscreen
+tela.widthOld = tela.width;
+tela.heightOld = tela.height;
+tela.width = window.innerWidth;
+tela.height = window.innerHeight;
+tela.style.border = '2px solid #000';
+const ctx = tela.getContext("2d");
+let fullscreen = false;
+let anterior = 0;
+let dt = 0;
+let estado = 1;
+
+
 const input = new InputManager();
 input.configurarTeclado({
     ArrowLeft: "SETA_ESQUERDA",
@@ -33,25 +45,14 @@ input.configurarTeclado({
     g: "ALTERNA_GRAFICO",
     Add: "+",
     Subtract: "-"
-
-
 });
-// Ocupa a janela toda
-tela.width = window.innerWidth;
-tela.height = window.innerHeight;
-tela.widthOld = 600;
-tela.heightOld = 350;
 
-tela.style.border = '2px solid #000';                       //Colocando borda no canvas
-const ctx = tela.getContext("2d");
-let fullscreen = false;
-let anterior = 0;
-let dt = 0;
-let estado = 1;
+
+
+
 
 // Controle das imagens e sons presentes no jogo
-//var assetsMng = new AssetsManager();
-//console.log(assetsMng);
+var assetsMng = new AssetsManager();
 // Carregamento das imagens do jogo
 assetsMng.loadImage("brick_gray", "assets/images/brick_gray.png");
 assetsMng.loadImage("brick_dark_Tp_0", "assets/images/brick_dark0.png");

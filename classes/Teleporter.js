@@ -1,5 +1,4 @@
 import Sprite from "./Sprite.js";
-import assetsMng from "./AssetsMng.js";
 import Hud from "./Hud.js";
 
 
@@ -81,7 +80,7 @@ export default class Teleporter extends Sprite {
 			return;
 		}
 		if (this.proximoTeleporte != undefined) {
-			assetsMng.play("teleporte");
+			this.cena.assetsMng.play("teleporte");
 			player.x = this.proximoTeleporte.x;
 			player.y = this.proximoTeleporte.y;
 			player.gx = this.proximoTeleporte.gx;

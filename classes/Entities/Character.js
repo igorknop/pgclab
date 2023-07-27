@@ -1,6 +1,5 @@
 import Sprite from "../Sprite.js";
 import seedGen from "../SeedGen.js";
-import assetsMng from "../AssetsMng.js";
 import { escreveTexto } from "../Utils.js";
 import Debugger, { DEBUG_MODE } from "../utils/Debugger.js";
 import { getPlayer } from "./Player.js";
@@ -216,7 +215,7 @@ export default class Character extends Sprite {
         else {
             this.imune = false;
         }
-        assetsMng.drawClip({
+        this.map.assetsMng.drawClip({
             ctx: ctx, key: this.nomeImagem,
             sx: this.animation[this.type].animationFrame[Math.floor(this.pose) % this.animation[this.type].qtdFrames].sx,
             sy: this.animation[this.type].animationFrame[Math.floor(this.pose) % this.animation[this.type].qtdFrames].sy,

@@ -1,9 +1,7 @@
 import Sprite from "../Sprite.js";
-import assetsMng from "../AssetsMng.js";
 import Character from "./Character.js";
 import Debugger, { DEBUG_MODE } from "../utils/Debugger.js";
 import ProgressionManager from "../ProgressionManager.js";
-import Slime from "./Slime.js";
 
 let _player = null;
 
@@ -370,7 +368,7 @@ export default class Player extends Character {
         else {
             this.imune = false;
         }
-        assetsMng.drawClipSize({
+        this.cena.assetsMng.drawClipSize({
             ctx: ctx, key: this.nomeImagem,
             sx: (auxAnimation.animationFrame[(Math.floor(this.pose) % auxAnimation.qtdAnimacoes)].sx),
             sy: (auxAnimation.animationFrame[(Math.floor(this.pose) % auxAnimation.qtdAnimacoes)].sy),

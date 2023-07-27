@@ -1,6 +1,5 @@
 import Sprite from "./Sprite.js";
 import seedGen from "./SeedGen.js";
-import assetsMng from "./AssetsMng.js";
 import Debugger, { DEBUG_MODE } from "./utils/Debugger.js";
 
 
@@ -64,7 +63,7 @@ export default class FireZone extends Sprite {
             w: 16, h: 24, dx: -8,  
             dy: -12
         });*/
-        assetsMng.drawClip({
+        this.map.assetsMng.drawClip({
             ctx: ctx, key: this.nomeImagem,
             sx: this.animation[Math.floor(this.pose) % this.qtdAnimacoes].sx,
             sy: this.animation[Math.floor(this.pose) % this.qtdAnimacoes].sy,
