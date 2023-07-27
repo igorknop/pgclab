@@ -54,20 +54,32 @@ input.configurarTeclado({
 // Controle das imagens e sons presentes no jogo
 var assetsMng = new AssetsManager();
 // Carregamento das imagens do jogo
-assetsMng.loadImage("brick_gray", "assets/images/brick_gray.png");
-assetsMng.loadImage("brick_dark_Tp_0", "assets/images/brick_dark0.png");
-assetsMng.loadImage("coin_copper", "assets/images/coin_copper.png");
-assetsMng.loadImage("coin_gold", "assets/images/coin_gold.png");
-assetsMng.loadImage("coin_silver", "assets/images/coin_silver.png");
-assetsMng.loadImage("flames", "assets/images/flames.png");
-assetsMng.loadImage("floor_sand", "assets/images/floor_sand_stone0.png");
-assetsMng.loadImage("grass_full", "assets/images/grass_full.png");
-assetsMng.loadImage("player", "assets/images/player-sprite.png");
-assetsMng.loadImage("rockBlock", "assets/images/rock.png");
-assetsMng.loadImage("slime", "assets/images/slime.png");
+import imgBrickGray from "./assets/images/brick_gray.png";
+assetsMng.loadImage("brick_gray", imgBrickGray);
+import imgBrickDark from "./assets/images/brick_dark0.png";
+assetsMng.loadImage("brick_dark_Tp_0", imgBrickDark);
+import imgCoinCopper from "./assets/images/coin_copper.png";
+assetsMng.loadImage("coin_copper", imgCoinCopper);
+import imgCoinGold from "./assets/images/coin_gold.png";
+assetsMng.loadImage("coin_gold", imgCoinGold);
+import imgCoinSilver from "./assets/images/coin_silver.png";
+assetsMng.loadImage("coin_silver", imgCoinSilver);
+import imgFlames from "./assets/images/flames.png";
+assetsMng.loadImage("flames", imgFlames);
+import imgFloorSand from "./assets/images/floor_sand_stone0.png";
+assetsMng.loadImage("floor_sand", imgFloorSand);
+import imgGrassFull from "./assets/images/grass_full.png";
+assetsMng.loadImage("grass_full", imgGrassFull);
+import imgPlayerSprite from "./assets/images/player-sprite.png";
+assetsMng.loadImage("player", imgPlayerSprite);
+import imgRock from "./assets/images/rock.png";
+assetsMng.loadImage("rockBlock", imgRock);
+import imgSlime from "./assets/images/slime.png";
+assetsMng.loadImage("slime", imgSlime);
 
 // Carregamento dos audios presentes no jogo
-assetsMng.loadAudio("teleporte", "assets/audios/Teleport.wav");
+import audioTeleport from "./assets/audios/Teleport.wav";
+assetsMng.loadAudio("teleporte", audioTeleport);
 
 // SeedGenerator ===> Utilizado para retornar ao mesmo mapa com apenas o código da seed
 let seedValueURL = location.search;
