@@ -8,6 +8,9 @@
   "license": "GPLv3",
   "private": true,
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "jest"
   },
   "jest": {
@@ -21,6 +24,7 @@
     "jest": "^26.6.3"
   },
   "dependencies": {
-    "esm": "^3.2.25"
+    "esm": "^3.2.25",
+    "vite": "^4.4.7"
   }
 }

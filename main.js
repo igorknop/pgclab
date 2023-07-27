@@ -1,21 +1,14 @@
-import AssetsManager from "./AssetsManager.js";
-import SeedGenerator from "./SeedGenerator.js";
-import Sprite from "./Sprite.js";
-import Player, { setPlayer, getPlayer } from "./Entities/Player.js";
-import Level from "./Level.js";
-import Room from "./Room.js";
-import Map from "./Map.js";
-import Cell from "./Cell.js";
-import CellularAutomata from "./CellularAutomata.js";
-import assetsMng from "./AssetsMng.js";
-import { setMapArea, getMapArea } from "./MAPA_AREA.js";
-import { setDebugMode, getDebugMode } from "./DebugMode.js";
-import { converteTelaCheia, escreveTexto } from "./Utils.js";
-import Game from "./Game.js";
+import assetsMng from "./classes/AssetsMng.js";
+import { getDebugMode, setDebugMode } from "./classes/DebugMode.js";
+import { getPlayer } from "./classes/Entities/Player.js";
+import Game from "./classes/Game.js";
+import Level from "./classes/Level.js";
+import { setMapArea } from "./classes/MAPA_AREA.js";
+import SeedGenerator from "./classes/SeedGenerator.js";
 
 // import AssetsManager from "./AssetsManager.js";
 // // import Mixer from "./Mixer.js";
-import InputManager from "./InputManager.js";
+import InputManager from "./classes/InputManager.js";
 // import Game from "./Game.js";
 // import CenaJogo from './Cenas/CenaJogo.js'
 // import CenaMenu from './Cenas/CenaMenu.js'
@@ -59,7 +52,6 @@ let estado = 1;
 // Controle das imagens e sons presentes no jogo
 //var assetsMng = new AssetsManager();
 //console.log(assetsMng);
-
 // Carregamento das imagens do jogo
 assetsMng.loadImage("brick_gray", "assets/images/brick_gray.png");
 assetsMng.loadImage("brick_dark_Tp_0", "assets/images/brick_dark0.png");
