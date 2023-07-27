@@ -15,6 +15,52 @@ export function getPlayer() {
     return _player;
 }
 
+let exemplo = {
+    timeWalkSound: 0.5,
+    levelNumber: 1,
+    vidas: 3,
+    vivo: true,
+    room: -1,
+    tesourosColetados: 0,
+    playerVel: 180, // 100
+    hp: 500,
+    maxHp: 500,
+    hitpoint: 50,
+    cooldownTeleporte: 1,
+    cooldownAtaque: 1,                  //Tempo do personagem travado até terminar o ataque
+    cooldownImune: 0,
+    imune: false,
+
+    // Mapa das teclas pressionadas
+    teclas: {
+      up: false,
+      down: false,
+      right: false,
+      left: false,
+      ctrl: false,
+      shift: false,
+      space: false
+    },
+
+    // Ataque
+    tiro: [],
+
+    // AnimationStates
+    sentidoMovimento: 0,          //0 => direita, 1 => baixo, 2 => esquerda, 3 => cima
+    atacando: 0,                  //0 => Não, 1 => Sim
+    animation: [],
+    nomeImagem: "player",
+
+    taxasCrescimento: {
+        hpMax: 1.3,
+        ataque: 1.3,
+        velocidade: 1.1,
+        raioAtaque: 1,
+        cooldownAtaque: 1.5,
+        cooldownImune: 1.5,
+    }
+  }
+
 export default class Player extends Character {
 
     constructor(params, nivel) {
