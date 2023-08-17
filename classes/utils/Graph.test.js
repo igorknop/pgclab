@@ -1,6 +1,4 @@
-// create jest tdd for class graph
-
-const Graph = require('./Graph');
+import Graph from './Graph.js';
 
 describe('Graph', () => {
   let graph;
