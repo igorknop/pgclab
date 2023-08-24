@@ -1,4 +1,4 @@
-import Sprite  from "../classes/Sprite";
+import Sprite  from "../src/classes/Sprite";
 
 describe("Classe Sprite", () => {
   describe("Está corretamente criada quando: ", () => {

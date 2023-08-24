@@ -1,11 +1,11 @@
-import AssetsManager from "./classes/AssetsManager.js";
-import { getDebugMode, setDebugMode } from "./classes/DebugMode.js";
-import { getPlayer } from "./classes/Entities/Player.js";
-import Game from "./classes/Game.js";
-import Level from "./classes/Level.js";
-import { setMapArea } from "./classes/MAPA_AREA.js";
-import SeedGenerator from "./classes/SeedGenerator.js";
-import InputManager from "./classes/InputManager.js";
+import AssetsManager from "./src/classes/AssetsManager.js";
+import { getDebugMode, setDebugMode } from "./src/classes/DebugMode.js";
+import { getPlayer } from "./src/classes/Entities/Player.js";
+import Game from "./src/classes/Game.js";
+import Level from "./src/classes/Level.js";
+import { setMapArea } from "./src/classes/MAPA_AREA.js";
+import SeedGenerator from "./src/classes/SeedGenerator.js";
+import InputManager from "./src/classes/InputManager.js";
 //import Mixer from "./classes/Mixer.js";
 
 // import Game from "./Game.js";
