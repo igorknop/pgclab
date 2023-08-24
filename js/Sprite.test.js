@@ -1,7 +1,7 @@
-import Sprite  from "../src/classes/Sprite";
+import Sprite from "./Sprite";
 
 describe("Classe Sprite", () => {
-  describe("Está corretamente criada quando: ", () => {
+  describe("Está corretamente criada quando:", () => {
 
     it("É um objeto", () => {
       const sprite = new Sprite();
@@ -35,15 +35,15 @@ describe("Classe Sprite", () => {
       expect(sprite2.vy).toBe(-10);
     });
 
-    /*it("Tem uma cor", () => {                  //Problema com a cor
+    it("Tem uma cor", () => {
       const sprite = new Sprite();
-      expect(sprite.colorBG).toBeDefined();
-    });*/
+      expect(sprite.color).toBeDefined();
+    });
 
     it("Tem mx e my = 0", () => {
       const sprite = new Sprite();
-      expect(sprite.gx).toEqual(0);
-      expect(sprite.gy).toEqual(0);
+      expect(sprite.mx).toEqual(0);
+      expect(sprite.my).toEqual(0);
     });
   });
 });
