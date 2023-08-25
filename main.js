@@ -8,9 +8,6 @@ import SeedGenerator from "./src/classes/SeedGenerator.js";
 import InputManager from "./src/classes/InputManager.js";
 //import Mixer from "./classes/Mixer.js";
 
-// import Game from "./Game.js";
-// import CenaJogo from './Cenas/CenaJogo.js'
-// import CenaMenu from './Cenas/CenaMenu.js'
 
 const tela = document.getElementById("canvas");
 // Switch to fullscreen
@@ -52,33 +49,14 @@ input.configurarTeclado({
 
 
 // Controle das imagens e sons presentes no jogo
-var assetsMng = new AssetsManager();
-// Carregamento das imagens do jogo
-import imgBrickGray from "./assets/images/brick_gray.png";
-assetsMng.loadImage("brick_gray", imgBrickGray);
-import imgBrickDark from "./assets/images/brick_dark0.png";
-assetsMng.loadImage("brick_dark_Tp_0", imgBrickDark);
-import imgCoinCopper from "./assets/images/coin_copper.png";
-assetsMng.loadImage("coin_copper", imgCoinCopper);
-import imgCoinGold from "./assets/images/coin_gold.png";
-assetsMng.loadImage("coin_gold", imgCoinGold);
-import imgCoinSilver from "./assets/images/coin_silver.png";
-assetsMng.loadImage("coin_silver", imgCoinSilver);
-import imgFlames from "./assets/images/flames.png";
-assetsMng.loadImage("flames", imgFlames);
-import imgFloorSand from "./assets/images/floor_sand_stone0.png";
-assetsMng.loadImage("floor_sand", imgFloorSand);
-import imgGrassFull from "./assets/images/grass_full.png";
-assetsMng.loadImage("grass_full", imgGrassFull);
-import imgPlayerSprite from "./assets/images/player-sprite.png";
-assetsMng.loadImage("player", imgPlayerSprite);
-import imgRock from "./assets/images/rock.png";
-assetsMng.loadImage("rockBlock", imgRock);
-import imgSlime from "./assets/images/slime.png";
-assetsMng.loadImage("slime", imgSlime);
+var assetsMngBuilder = new AssetsManagerBuilderLPC();
+assetsMngBuilder.reset();
+var assetsMng = assetsMngBuilder.build();
 
 // Carregamento dos audios presentes no jogo
 import audioTeleport from "./assets/audios/Teleport.wav";
+import { AssetsManagerBuilder } from "./src/classes/AssetsManagerBuilder.js";
+import { AssetsManagerBuilderLPC } from "./src/classes/AssetsManagerBuilderLPC.js";
 assetsMng.loadAudio("teleporte", audioTeleport);
 
 // SeedGenerator ===> Utilizado para retornar ao mesmo mapa com apenas o código da seed
@@ -108,124 +86,7 @@ const K = 1;
 const debugModeBegin = 0;
 const debugModeEnd = 18;
 setDebugMode(debugModeBegin);    // 0
-// const player = new Player({
-//     s: 27, w: 27, h: 11,
-//     hitBox: {
-//         x: 0,
-//         y: 0,
-//         w: 27,
-//         h: 11,
-//         wDefault: 27,
-//         hDefault: 11
-//     }
-// });
-// setPlayer(player);
 
-// const hud = getHud();
-// hud.init(tela);
-
-// const levelAtual = new Level(widthMap, heightMap, sizeMap, { hud, seedGen, assetsMng });
-// let levels = [];
-// levels.push(new Level(widthMap, heightMap, sizeMap, { hud, seedGen, assetsMng }));
-
-/**
-  METODO DE SUBMATRIZES
-*/
-
-/*
-var geraFase = new CellularAutomata(Math.floor(heightMap / K), Math.floor(widthMap / K), 1, 0.5, 4, 0, 5, 1);//new CellularAutomata(heightMap, widthMap, 2, 0.5, 13, 0, 5, 1);
-// 0 => floor
-// 5 => rock
-// 1 => wall
-for(var k = 0; k<K; k++){
-  geraFase.scenarioRandomWall();
-  geraFase.fullstep(2);
-  //geraFase.fullstep(6);
-  levels[0].setMatrixMap2(getelaraFase.map, Math.floor(k/3)*40, (k%3)*40);
-}
-geraFase.countRooms();
-geraFase.filterRooms(15);
-for(var k = 0; k<K; k++){
-  levels[0].setMatrixMap2(geraFase.map, Math.floor(k/3)*40, (k%3)*40);
-}
-*/
-
-/**
-  METODO DA MATRIZ TOTAL
-*/
-// const geraFase = new CellularAutomata({
-//     HS: heightMap, WS: widthMap, MOORE: 1, r: 0.5,
-//     totalRock: 4, floorIndex: 0, rockIndex: 2, wallIndex: 1, seedGen
-// });   
-//new CellularAutomata(heightMap, widthMap, 2, 0.5, 13, 0, 5, 1);
-// 0 => floor
-// 2 => rock
-// 1 => wall
-
-// geraFase.scenarioRandomWall();
-// geraFase.fullstep(2);
-// geraFase.countRooms();
-// geraFase.filterRooms(25);
-
-// levels[0].setMatrixMap(geraFase.map);       // Copia a matriz de tipos dentro do gerador
-// levels[0].copiaSalas(geraFase.rooms);       // Copia os dados em que os blocos da sala são apenas as posições linha e coluna da matriz
-// levels[0].montarLevel({
-//     dt: dt,
-//     geraFase: geraFase,
-//     player: getPlayer(),
-// });
-// levels[0].setTempo(20);                // 20 segundos
-
-let tempoGameOver = 2;
-
-// levelAtual.clonarLevel(levels[0]);
-// getPlayer().map = levelAtual.mapa;
-
-// let teasuresCollected = 0;
-
-// Tempo
-// const barraTempo = {
-//     externa: new Sprite(),
-//     interna: new Sprite(),
-//     desenhar: function (ctx) {
-//         this.externa.desenharTempo(ctx);
-//         this.interna.desenharTempo(ctx);
-//     },
-//     init: function () {
-//         this.externa.w = 127;
-//         this.externa.h = 15;
-//         this.externa.colorBG = "black";
-//         this.externa.colorBorder = "white";
-//         this.externa.x = 95;
-//         this.externa.y = 7;
-//         this.interna.w = 127;
-//         this.interna.h = 15;
-//         this.interna.x = 96;
-//         this.interna.y = 8;
-//         this.interna.colorBG = "rgb(170, 120, 0)";
-//         this.interna.borderSize = 0;
-//     }
-// };
-
-// barraTempo.init();
-
-// Energia === Player
-// const barraEnergia = {
-//     sprite: new Sprite(),
-//     desenhar: function (ctx) {
-//         this.sprite.desenharBarraEnergiaHUD(ctx, getPlayer());
-//     },
-//     init: function () {
-//         this.sprite.w = 127;
-//         this.sprite.h = 15;
-//         this.sprite.colorBG = "black";
-//         this.sprite.colorBorder = "white";
-//         this.sprite.x = 95;
-//         this.sprite.y = 7;
-//     }
-// };
-
-// barraEnergia.init();
 
 // Main Menu campos
 const fontMainMenu = "30px Arial Black";
@@ -266,109 +127,6 @@ let stateMainMenu = 0;
 *                                   *
 *************************************/
 const game = new Game(tela, assetsMng, input);
-// requestAnimationFrame(passo);
-// function passo(t) {
-//     dt = (t - anterior) / 1000;
-//     if (assetsMng.progresso() === 100) {       // Verifica se carregou todos os arquivos do jogo
-//         switch (estado) {
-//             case 0:     // Jogando
-//                 limparTela();
-//                 /*if(audioLibrary.isPlaying("BGM")==false){
-//                   audioLibrary.play("BGM");
-//                 }*/
-// levelAtual.movimento(dt);
-//                 controleTempo();
-//                 ctx.save();
-//                 ctx.scale(escala, escala);
-//                 ctx.translate(-getPlayer().x + tela.width / 4, - getPlayer().y + tela.height / 4);
-//                 // ctx.translate(-getPlayer().x, - getPlayer().y);
-//                 levelAtual.desenhar(ctx);
-//                 ctx.restore();
-//                 desenharHUD(ctx);
-//                 if (!getPlayer().vivo) {
-//                     estado = 5;
-//                 }
-//                 break;
-//             case 1:         // Main menu
-//                 limparTela();
-//                 //imageLibrary.drawSize(ctx, "BG", 0, 0, tela.width, tela.height); // Imagem do fundo
-//                 //if(audioLibrary.isPlaying("BGM")==false){
-//                 //audioLibrary.play("BGM");
-//                 //}
-//                 ctx.fillStyle = wordsColor;
-//                 ctx.textAlign = alignMainMenu;
-//                 ctx.lineWidth = 2;
-//                 ctx.strokeStyle = "black";
-//                 ctx.font = "40px Arial Black";
-//                 ctx.strokeText("Maze Runner", tela.width / 2, tela.height / 3 - 50);
-//                 ctx.fillText("Maze Runner", tela.width / 2, tela.height / 3 - 50);
-//                 ctx.font = "15px Arial Black";
-//                 ctx.font = fontMainMenu;
-//                 if (stateMainMenu == 0) {
-//                     ctx.fillStyle = "yellow";
-//                     ctx.strokeText("New Game", tela.width / 2, tela.height / 2 - 60);
-//                     ctx.fillText("New Game", tela.width / 2, tela.height / 2 - 60);
-//                     ctx.fillStyle = wordsColor;
-//                     ctx.strokeText("Quit", tela.width / 2, tela.height / 2 - 10);
-//                     ctx.fillText("Quit", tela.width / 2, tela.height / 2 - 10);
-//                 }
-//                 else {
-//                     ctx.fillStyle = wordsColor;
-//                     ctx.strokeText("New Game", tela.width / 2, tela.height / 2 - 60);
-//                     ctx.fillText("New Game", tela.width / 2, tela.height / 2 - 60);
-//                     ctx.fillStyle = "yellow";
-//                     ctx.strokeText("Quit", tela.width / 2, tela.height / 2 - 10);
-//                     ctx.fillText("Quit", tela.width / 2, tela.height / 2 - 10);
-//                 }
-//                 break;
-//             case 2:     // Game Over
-//                 limparTela();
-//                 //audioLibrary.stop("BGM");
-//                 ctx.fillStyle = "white";
-//                 ctx.textAlign = alignMainMenu;
-//                 ctx.font = "40px Arial Black";
-//                 ctx.lineWidth = 2;
-//                 ctx.strokeStyle = "black";
-//                 ctx.strokeText("GAME OVER", tela.width / 2, tela.height / 2);
-//                 ctx.fillText("GAME OVER", tela.width / 2, tela.height / 2);
-
-//                 if (tempoGameOver >= 0) {
-//                     tempoGameOver = tempoGameOver - 0.7 * dt;
-//                 }
-//                 else {
-//                     limparDados();
-//                     estado = 1;
-//                 }
-//                 break;
-//             case 3:       // Tela preta == Jogo finalizado
-//                 limparTela();
-//                 break;
-//             case 4:       // Passou de fase
-//                 barraTempo.interna.w = 127;
-//                 /*treasuresCount = 0;
-//                 teasuresCollected = 0;*/
-//                 getPlayer().levelNumber = getPlayer().levelNumber + 1;
-//                 loadLevel(0);       // Load new level
-//                 break;
-//             case 5:     // Recarregar fase
-//                 barraTempo.interna.w = 127;
-//                 /*treasuresCount = 0;
-//                 teasuresCollected = 0;*/
-//                 getPlayer().vidas--;
-//                 if (getPlayer().vidas < 1) {       // Game over
-//                     estado = 2;
-//                     tempoGameOver = 2;
-//                 }
-//                 else {
-//                     loadLevel(1);   // Reload Level
-//                 }
-//                 break;
-//             default:
-//         }
-//     }
-//     anterior = t;
-//     requestAnimationFrame(passo);
-// }
 
 // A cada 1 segundo ele executa uma diminuição na barra de tempo
 function controleTempo() {
@@ -385,79 +143,7 @@ function controleTempo() {
     }
 }
 
-/*
-function desenharHUD() {
-    barraTempo.desenhar(ctx);
-    barraEnergia.desenhar(ctx);
-    hud.bussola.desenhar(ctx);
 
-    ctx.font = "15px Arial Black";
-    ctx.fillStyle = "white";
-    ctx.textAlign = alignMainMenu;
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = "black";
-    escreveTexto(ctx, hud.tempo.text, hud.tempo.x, hud.tempo.y);
-    escreveTexto(ctx, hud.energia.text, hud.energia.x, hud.energia.y);
-    escreveTexto(ctx, hud.vidas.text + getPlayer().vidas, hud.vidas.x, hud.vidas.y);
-    escreveTexto(ctx, hud.tesouros.text + getPlayer().tesourosColetados, hud.tesouros.x, hud.tesouros.y);
-    escreveTexto(ctx, hud.level.text + getPlayer().levelNumber, hud.level.x, hud.level.y);
-
-
-
-    if (getDebugMode() >= 1) {
-        let typeMode = hud.debugText[getDebugMode() - 1];
-
-        // Desenha menu debaixo
-        ctx.font = "13px Arial Black";
-        ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
-        ctx.strokeStyle = "rgba(238, 255, 0, 0.5)";
-        ctx.fillRect(converteTelaCheia(5, tela.widthOld, tela.width), converteTelaCheia(310, tela.heightOld, tela.height), converteTelaCheia(585, tela.widthOld, tela.width), converteTelaCheia(37, tela.heightOld, tela.height));
-        ctx.strokeRect(converteTelaCheia(5, tela.widthOld, tela.width), converteTelaCheia(310, tela.heightOld, tela.height), converteTelaCheia(585, tela.widthOld, tela.width), converteTelaCheia(37, tela.heightOld, tela.height));
-
-        // Escritos
-        ctx.strokeStyle = "black";
-        ctx.fillStyle = "yellow";
-        escreveTexto(ctx, "Debug mode ativado!!!", converteTelaCheia(110, tela.widthOld, tela.width), converteTelaCheia(321, tela.heightOld, tela.height));
-        escreveTexto(ctx, typeMode, converteTelaCheia(110, tela.widthOld, tela.width), converteTelaCheia(332, tela.heightOld, tela.height));
-        escreveTexto(ctx, "FPS: " + ((1 / dt).toFixed(4)), converteTelaCheia(110, tela.widthOld, tela.width), converteTelaCheia(343, tela.heightOld, tela.height));
-        escreveTexto(ctx, "Teleporte Inicial Level: [" + (levelAtual.teleporteInicioLevel.gy) + "][" + (levelAtual.teleporteInicioLevel.gx) + "]", converteTelaCheia(tela.widthOld / 2, tela.widthOld, tela.width), converteTelaCheia(321, tela.heightOld, tela.height));
-        escreveTexto(ctx, "Teleporte Final Level: [" + (levelAtual.teleporteFinalLevel.gy) + "][" + (levelAtual.teleporteFinalLevel.gx) + "]", converteTelaCheia(tela.widthOld / 2, tela.widthOld, tela.width), converteTelaCheia(343, tela.heightOld, tela.height));
-        escreveTexto(ctx, "Escala mapa: " + escala.toFixed(4), converteTelaCheia(500, tela.widthOld, tela.width), converteTelaCheia(321, tela.heightOld, tela.height));
-        escreveTexto(ctx, "Grade Player: [" + (getPlayer().gy) + "][" + (getPlayer().gx) + "]", converteTelaCheia(500, tela.widthOld, tela.width), converteTelaCheia(332, tela.heightOld, tela.height));
-        // escreveTexto(ctx, "Grade Player: [" + tela.width + "][" + tela.height + "]", converteTelaCheia(400, tela.widthOld, tela.width), converteTelaCheia(332, tela.heightOld, tela.height));
-        escreveTexto(ctx, "Seed: " + seedValueURL, converteTelaCheia(500, tela.widthOld, tela.width), converteTelaCheia(343, tela.heightOld, tela.height));
-    }
-}
-*/
-
-/*
-// Atualiza o formato do convas ao mudar o formato da janela ou ser redimensionada
-function onResize(tela) {
-    tela.width = window.innerWidth;
-    tela.height = window.innerHeight;
-    updateTamanhoElementos(tela);
-}
-
-window.addEventListener('resize', onResize, false);         // Ouve os eventos de resize
-
-// Atualiza o tamanho dos elementos quando a interface é redimensionada
-function updateTamanhoElementos(tela) {
-    // Update barra de tempo
-    barraTempo.externa.x = converteTelaCheia(67, tela.widthOld, tela.width);
-    barraTempo.externa.y = converteTelaCheia(13.5, tela.heightOld, tela.height);
-    barraTempo.interna.x = converteTelaCheia(67, tela.widthOld, tela.width);
-    barraTempo.interna.y = converteTelaCheia(13.5, tela.heightOld, tela.height);
-
-    // Update barra de energia do player
-    barraEnergia.sprite.x = converteTelaCheia(225, tela.widthOld, tela.width);
-    barraEnergia.sprite.y = converteTelaCheia(13.5, tela.heightOld, tela.height);
-
-    // HUD
-    hud.updateElementos(tela);
-}
-
-updateTamanhoElementos(tela);
-*/
 
 function limparDados() {
     levelAtual = new Level(widthMap, heightMap, sizeMap, { hud, seedGen, assetsMng });
@@ -637,4 +323,3 @@ function mapeamentoTecladoNoEstadoJogando(keyCode) {
             break;
     }
 }
-

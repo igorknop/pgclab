@@ -11,10 +11,20 @@ The project is divided in two main parts: the core and the modules. The core is 
 classDiagram
     class Game {
     }
-    class AssetManager {
+    class AssetsManager {
     }
+    class InputManager {
+    }
+    class Level {
+
+    }
+    class SeedGenerator {
+
+    }
+
     
     Game -- AssetManager
+    Game -- InputManager
 ```
 
 ```
