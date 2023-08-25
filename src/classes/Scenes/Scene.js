@@ -4,25 +4,22 @@ export const alignMainMenu = "center";
 import Hud from "../Hud.js";
 import getXY from "../utils/getXY.js";
 
-export default class Cena {
+export default class Scene {
     constructor() {
         this.game = null;
         this.assets = null;
-        this.canvas = null;
-        this.ctx = null;
-        this.input = null;
     }
 
-    desenhar() {
-        this.limparTela();
+    draw() {
+        this.clearScreen();
     }
 
-    adicionar(sprite) {
-        sprite.cena = this;
+    add(sprite) {
+        sprite.scene = this;
         this.sprites.push(sprite);
     }
 
-    passo(dt) {
+    step(dt) {
         if (this.assets.acabou()) {
             for (const sprite of this.sprites) {
                 sprite.passo(dt);
@@ -30,62 +27,62 @@ export default class Cena {
         }
     }
 
-    quadro(t) {
+    frame(t) {
         this.t0 = this.t0 ?? t;
         this.dt = (t - this.t0) / 1000;
-        // this.passo(this.dt);
-        this.desenhar();
-        // this.checaColisao();
-        if (this.rodando) {
-            this.idAnim = requestAnimationFrame((t) => { this.quadro(t); });
+        // this.step(this.dt);
+        this.draw();
+        // this.checkCollision();
+        if (this.running) {
+            this.idAnim = requestAnimationFrame((t) => { this.frame(t); });
         }
         this.t0 = t;
     }
 
-    iniciar() {
-        this.rodando = true;
-        this.idAnim = requestAnimationFrame((t) => { this.quadro(t); });
+    start() {
+        this.running = true;
+        this.idAnim = requestAnimationFrame((t) => { this.frame(t); });
     }
 
-    parar() {
-        this.rodando = false;
+    stop() {
+        this.running = false;
         cancelAnimationFrame(this.idAnim);
         this.t0 = null;
         this.dt = 0;
     }
 
-    checaColisao() {
+    checkCollision() {
         for (let a = 0; a < this.sprites.length - 1; a++) {
             const spriteA = this.sprites[a];
             for (let b = a + 1; b < this.sprites.length; b++) {
                 const spriteB = this.sprites[b];
                 if (spriteA.colidiuCom(spriteB)) {
-                    this.quandoColidir(spriteA, spriteB);
+                    this.onCollide(spriteA, spriteB);
                 }
             }
         }
     }
 
-    quandoColidir(a, b) {
+    onCollide(a, b) {
 
     }
 
-    configuraMapa(mapa) {
+    setupMap(mapa) {
         this.mapa = mapa;
         this.mapa.cena = this;
     }
 
-    configuraLayer(layer) {
+    setupLayer(layer) {
         this.layer = layer;
         this.layer.cena = this;
     }
 
-    configuraPath(path) {
+    setupPath(path) {
         this.path = path;
         this.path.cena = this;
     }
 
-    preparar() {
+    setup() {
         this.sprites = [];
         this.aRemover = [];
         this.t0 = null;
@@ -94,14 +91,14 @@ export default class Cena {
         this.mapa = null;
         this.layer = null;
         this.path = null;
-        this.rodando = true;
+        this.running = true;
     }
 
-    desenharHud() {
+    drawHud() {
 
     }
 
-    limparTela() {
+    clearScreen() {
         this.ctx.fillStyle = "black";
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
@@ -119,7 +116,7 @@ export default class Cena {
         this.canvas.style.cursor = 'default'
     }
 
-    // capturarInput() {
+    // captureInput() {
     //     if (this.input.comandos.get("F")) {
     //         fullscreen = !fullscreen;
     //         if (fullscreen) {

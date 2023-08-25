@@ -1,15 +1,15 @@
-import CenaJogo from "./Cenas/CenaJogo.js";
-import CenaMenu from "./Cenas/CenaMenu.js";
+import GameScene from "./Scenes/GameScene.js";
+import MenuScene from "./Scenes/MenuScene.js";
 
 export default class Game {
 
-    constructor(canvas, assets, inputManager) {
+    constructor(canvas, assets, input) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
         this.assets = assets;
-        this.inputManager = inputManager;
-        this.cenas = new Map();
-        this.cenaAtual = null;
+        this.input = input;
+        this.scenes = new Map();
+        this.currentScene = null;
         this.pause = "false";
 
         this.widthMap = 120;
@@ -17,42 +17,42 @@ export default class Game {
         this.sizeMap = 32;
         this.escala = 1.8;
 
-        this.adicionarCena('jogo', new CenaJogo());
-        this.adicionarCena('menuInicial', new CenaMenu());
-        this.selecionarCena('menuInicial');
+        this.addScene('jogo', new GameScene());
+        this.addScene('menuInicial', new MenuScene());
+        this.selectScene('menuInicial');
         this.moedas = 0;
     }
 
-    adicionarCena(chave, cena) {
-        this.cenas.set(chave, cena);
-        cena.game = this;
-        cena.assets = this.assets;
-        cena.canvas = this.canvas;
-        cena.ctx = this.ctx;
-        cena.input = this.inputManager;
-        if (this.cenaAtual === null) {
-            this.cenaAtual = cena;
+    addScene(chave, scene) {
+        this.scenes.set(chave, scene);
+        scene.game = this;
+        scene.assets = this.assets;
+        scene.canvas = this.canvas;
+        scene.ctx = this.ctx;
+        scene.input = this.input;
+        if (this.currentScene === null) {
+            this.currentScene = scene;
         }
     }
 
-    selecionarCena(chave) {
-        if (this.cenas.has(chave)) {
-            this.parar();
-            this.cenaAtual = this.cenas.get(chave);
-            this.preparar();
-            this.iniciar();
+    selectScene(key) {
+        if (this.scenes.has(key)) {
+            this.stop();
+            this.currentScene = this.scenes.get(key);
+            this.setup();
+            this.start();
         }
     }
 
-    preparar() {
-        this.cenaAtual?.preparar();
+    setup() {
+        this.currentScene?.setup();
     }
 
-    iniciar() {
-        this.cenaAtual?.iniciar();
+    start() {
+        this.currentScene?.start();
     }
 
-    parar() {
-        this.cenaAtual?.parar();
+    stop() {
+        this.currentScene?.stop();
     }
 }

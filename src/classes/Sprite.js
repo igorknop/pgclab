@@ -50,6 +50,7 @@ export default class Sprite {
         this.colorBG;
         this.colorBorder;
         this.borderSize = 1;
+        this.scene = null;
     };
 
     mover(dt) {

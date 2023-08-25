@@ -9,21 +9,18 @@ The project is divided in two main parts: the core and the modules. The core is 
 
 ```mermaid
 classDiagram
-    class Game {
-    }
-    class AssetsManager {
-    }
-    class InputManager {
-    }
-    class Level {
-
-    }
-    class SeedGenerator {
-
-    }
+    
+    AssetsManagerBuilder --> AssetsManager
+    AssetsManagerBuilderLPC --|> AssetsManagerBuilder
+    GameScene --|> Scene
+    StartScene --|> Scene
+    SingleMapScene --|> Scene
+    SingleMapScene -- Map
+    Scene --o Game
+    Scene --> SeedGenerator
 
     
-    Game -- AssetManager
+    Game -- AssetsManager
     Game -- InputManager
 ```
 

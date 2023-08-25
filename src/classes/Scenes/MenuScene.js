@@ -1,9 +1,9 @@
-import Cena, { fontMainMenu, wordsColor, alignMainMenu } from './Cena.js';
+import Scene, { fontMainMenu, wordsColor, alignMainMenu } from './Scene.js';
 // let stateMainMenu = 0;
-export default class CenaMenu extends Cena {
+export default class CenaMenu extends Scene {
 
-    desenhar() {
-        super.desenhar();
+    draw() {
+        super.draw();
         this.ctx.fillStyle = wordsColor;
         this.ctx.textAlign = alignMainMenu;
         this.ctx.lineWidth = 2;
@@ -22,11 +22,11 @@ export default class CenaMenu extends Cena {
         this.ctx.fillText("Quit", this.canvas.width / 2, this.canvas.height / 2 - 10);
     }
 
-    quadro(t) {
-        super.quadro(t);
+    frame(t) {
+        super.frame(t);
         if (this.estadoMenu === 0) {
             if (this.input.foiPressionado("ENTER")) {
-                this.game.selecionarCena("jogo");
+                this.game.selectScene("jogo");
                 return;
             }
         }
@@ -37,11 +37,11 @@ export default class CenaMenu extends Cena {
         }
     }
 
-    iniciar() {
-        super.iniciar();
+    start() {
+        super.start();
     }
 
-    preparar() {
+    setup() {
         this.estadoMenu = 0;
     }
 

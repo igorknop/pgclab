@@ -7,39 +7,39 @@ import Player, { getPlayer, setPlayer } from "../Entities/Player.js";
 import SeedGenerator from "../SeedGenerator.js";
 import Sprite from "../Sprite.js";
 import { converteTelaCheia, escreveTexto } from "../Utils.js";
-import Cena, { fontMainMenu, wordsColor, alignMainMenu } from "./Cena.js";
+import Scene, { fontMainMenu, wordsColor, alignMainMenu } from "./Scene.js";
 import Button from "../utils/Button.js";
 import getXY from '../utils/getXY.js';
 import Debugger, { DEBUG_MODE } from '../utils/Debugger.js';
 let stateMainMenu = 0;
-export default class CenaJogo extends Cena {
+export default class GameScene extends Scene {
 
-    desenhar() {
-        super.desenhar();
+    draw() {
+        super.draw();
         /*if(audioLibrary.isPlaying("BGM")==false){
           audioLibrary.play("BGM");
         }*/
-        this.controleTempo();
+        this.timeControl();
         this.ctx.save();
         this.ctx.scale(this.game.escala, this.game.escala);
         this.ctx.translate(-getPlayer().x + this.canvas.width / 4, - getPlayer().y + this.canvas.height / 4);
         // this.ctx.translate(-getPlayer().x, - getPlayer().y);
         this.levelAtual.desenhar(this.ctx);
         this.ctx.restore();
-        this.desenharHUD(this.ctx);
+        this.drawHud(this.ctx);
         if (!getPlayer().vivo) {
             this.estado = 5;
         }
         this.hud.desenharBotoes(this.ctx, this.assets);
     }
 
-    quadro(t) {
-        super.quadro(t);
-        this.capturarInput();
+    frame(t) {
+        super.frame(t);
+        this.captureInput();
         this.levelAtual.passo(this.dt);
     }
 
-    preparar() {
+    setup() {
         this.debugModeBegin = 0;
         this.debugModeEnd = 18;
         this.hud = Hud.getInstance();
@@ -109,8 +109,8 @@ export default class CenaJogo extends Cena {
 
         // window.addEventListener('resize', onResize, false);         // Ouve os eventos de resize
         
-        this.criarBotoes();
-        this.criarBarras();
+        this.createButtons();
+        this.createBars();
         this.canvas.onmousemove = (e) => {
             this.mousemove(e);
         };
@@ -118,7 +118,7 @@ export default class CenaJogo extends Cena {
             this.mousedown(e);
         };
         this.loadLevel(0);
-        this.updateTamanhoElementos(this.canvas);
+        this.updateElementsSize(this.canvas);
     }
 
     mousedown(e) {
@@ -140,12 +140,12 @@ export default class CenaJogo extends Cena {
         super.mousemove(e);
     }
 
-    inciar() {
-        super.iniciar();
-        window.addEventListener("resize", onResize, false); // Ouve os eventos de resize
+    start() {
+        super.start();
+        window.addEventListener("resize", this.onResize, false); // Ouve os eventos de resize
     }
 
-    desenharHUD() {
+    drawHud() {
         this.hud.bussola.desenhar(this.ctx);
 
         this.ctx.font = "15px Arial Black";
@@ -177,11 +177,11 @@ export default class CenaJogo extends Cena {
 
         this.hud.desenharBarras(this.ctx);
         this.ctx.textAlign = alignMainMenu;
-        this.desenharDebug();
+        this.drawDebug();
         this.hud.grafico.desenhar(this.ctx);
     }
     
-    desenharDebug() {
+    drawDebug() {
         if (Debugger.isDebugModeOn()) {
             let typeMode = this.hud.debugText[Debugger.getDebugMode() - 1];
     
@@ -249,7 +249,7 @@ export default class CenaJogo extends Cena {
         }
     }
 
-    controleTempo() {
+    timeControl() {
         if (!Debugger.isDebugModeOn()) {
             //if(!getPlayer().imune){
             this.barraTempo.barraExterna.w -= (this.barraTempo.barraExterna.w * this.dt) / this.levels[0].tempoTotal;
@@ -264,18 +264,18 @@ export default class CenaJogo extends Cena {
             }
         }
     }
-    onResize(tela) {
-        tela.width = window.innerWidth;
-        tela.height = window.innerHeight;
-        updateTamanhoElementos(this.canvas);
+    onResize(canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        this.updateElementsSize(this.canvas);
     }
 
 
 
     // Atualiza o tamanho dos elementos quando a interface é redimensionada
-    updateTamanhoElementos(tela) {
+    updateElementsSize(canvas) {
         // HUD
-        this.hud.updateElementos(tela);
+        this.hud.updateElementos(canvas);
     }
 
     getSeedGenerator() {
@@ -299,7 +299,7 @@ export default class CenaJogo extends Cena {
         switch (option) {
             case 0:   //Load New Level
                 if (getPlayer().levelNumber > this.levels.length) {
-                    this.limparDados();
+                    this.clearData();
                     this.estado = 1;
                 }
                 else {
@@ -321,7 +321,7 @@ export default class CenaJogo extends Cena {
         }
     }
 
-    capturarInput() {
+    captureInput() {
         if (this.input.foiPressionado("M")) {
             this.hud.bussola.mapMode = this.hud.bussola.mapMode + 1;
             if (this.hud.bussola.mapMode > 3) {
@@ -331,7 +331,7 @@ export default class CenaJogo extends Cena {
         }
         if (this.input.foiPressionado("ESC")) {
             this.game.selecionarCena("menuInicial");
-            this.limparDados();
+            this.clearData();
             this.estado = 1;
             return;
         }
@@ -409,7 +409,7 @@ export default class CenaJogo extends Cena {
         }
     }
 
-    limparDados() {
+    clearData() {
         this.levelAtual = new Level(this.game.widthMap,
             this.game.heightMap,
             this.game.sizeMap,
@@ -421,7 +421,7 @@ export default class CenaJogo extends Cena {
         this.hud.bussola.update(this.levelAtual);
     }
 
-    criarBotoes() {
+    createButtons() {
         const aumentarDano = new Button(
             0.2 * this.canvas.width,
             0.9 * this.canvas.height,
@@ -454,7 +454,7 @@ export default class CenaJogo extends Cena {
         this.hud.adicionarBotao(aumentarVelocidade);
     }
 
-    criarBarras() {
+    createBars() {
         this.barraTempo = this.hud.adicionarBarra({
             x: 67,
             y: 13.5,
