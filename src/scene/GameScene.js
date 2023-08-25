@@ -322,14 +322,14 @@ export default class GameScene extends Scene {
     }
 
     captureInput() {
-        if (this.input.wasPressed("M")) {
+        if (this.input.isPressed("M")) {
             this.hud.bussola.mapMode = this.hud.bussola.mapMode + 1;
             if (this.hud.bussola.mapMode > 3) {
                 this.hud.bussola.mapMode = 0;
             }
             return;
         }
-        if (this.input.wasPressed("ESC")) {
+        if (this.input.isPressed("ESC")) {
             this.game.selecionarCena("menuInicial");
             this.clearData();
             this.estado = 1;
@@ -337,21 +337,21 @@ export default class GameScene extends Scene {
         }
 
         // Debug mode
-        if (this.input.wasPressed("p")) {
+        if (this.input.isPressed("p")) {
             console.log("Clicou no P");
             Debugger.nextDebugMode();
             this.levelAtual.iniciaRooms();
             return;
         }
         
-        if (this.input.wasPressed("o")) {
+        if (this.input.isPressed("o")) {
             Debugger.previousDebugMode();
             this.levelAtual.iniciaRooms();
             return;
         }
         
         // Path
-        if (this.input.wasPressed("ALTERNA_CAMINHO")) {
+        if (this.input.isPressed("ALTERNA_CAMINHO")) {
             if (Debugger.isDebugModeOn()) {
                 Debugger.nextPath();
                 this.hud.atualizarGrafico(this.levelAtual);
@@ -359,19 +359,19 @@ export default class GameScene extends Scene {
             return;
         }
 
-        if (this.input.wasPressed("ALTERNA_GRAFICO")) {
+        if (this.input.isPressed("ALTERNA_GRAFICO")) {
             if (Debugger.isDebugModeOn()) {
                 this.hud.grafico.alternarModo();
             }
             return;
         }
 
-        if (this.input.wasPressed("t")) {
+        if (this.input.isPressed("t")) {
             this.levelAtual.posicionarInimigoDebug();
             return;
         }
 
-        if (this.input.wasPressed("+")) {
+        if (this.input.isPressed("+")) {
             if (Debugger.isDebugModeOn()) {
                 this.game.escala = this.game.escala + 0.025;
                 if (this.game.escala >= 0.85)
@@ -389,7 +389,7 @@ export default class GameScene extends Scene {
             }
             return;
         }
-        if (this.input.wasPressed("-")) {
+        if (this.input.isPressed("-")) {
             if (Debugger.isDebugModeOn()) {
                 this.game.escala = this.game.escala - 0.025;
                 if (this.game.escala >= 0.85)

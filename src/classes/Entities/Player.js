@@ -245,13 +245,13 @@ export default class Player extends Character {
         if (input.isPressed("CONTROL")) {
             this.realizarAtaque();
         } //else{ this.atacando = 0;}
-        if (input.wasPressed("SHIFT")) { this.playerVel = 250; } else { this.playerVel = 180 }
+        if (input.isPressed("SHIFT")) { this.playerVel = 250; } else { this.playerVel = 180 }
 
         // Condição de parada
         if (input.isPressed("SETA_CIMA") === input.isPressed("SETA_BAIXO")) { this.direcaoY = 0; }
         if (input.isPressed("SETA_DIREITA") === input.isPressed("SETA_ESQUERDA")) { this.direcaoX = 0; }
 
-        if (input.wasPressed("SPACE")) {
+        if (input.isPressed("SPACE")) {
             if (this.cooldownTeleporte == 0) {
                 if (this.level.teleportar()) {
                     this.cooldownTeleporte = 1;

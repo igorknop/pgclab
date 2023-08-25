@@ -25,14 +25,14 @@ export default class CenaMenu extends Scene {
     frame(t) {
         super.frame(t);
         if (this.estadoMenu === 0) {
-            if (this.input.wasPressed("ENTER")) {
+            if (this.input.isPressed("ENTER")) {
                 this.game.selectScene("jogo");
                 return;
             }
         }
-        if (this.input.wasPressed("SETA_BAIXO")) {
+        if (this.input.isPressed("SETA_BAIXO")) {
             this.estadoMenu = 1;
-        } else if (this.input.wasPressed("SETA_CIMA")) {
+        } else if (this.input.isPressed("SETA_CIMA")) {
             this.estadoMenu = 0;
         }
     }

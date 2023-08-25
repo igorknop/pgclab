@@ -8,15 +8,16 @@ export default class InputManagerBuilder {
     this._inputManager = new InputManager();
   }
   setupKeyboard() {
-
+    this._inputManager.setupKeyboard();
   }
-  setupJoystick() {
-
+  setupGamepad() {
+    this._inputManager.setupGamepad();
   }
+
   build() {
     this.reset();
     this.setupKeyboard();
-    this.setupJoystick();
+    this.setupGamepad();
     return this._inputManager;
   }
 }
