@@ -9,6 +9,19 @@ O PGCLab foi desenvolvido durante 2020, como um projeto da disciplina DCC104 e D
 * [Villa Verde, R. C.; Knop, I. O. Avaliação da geração de conteúdo por Wave Function Collapse na experiência do jogador. 2021. ](http://monografias.ice.ufjf.br/tcc-web/downloadPdf?id=572)
 * [Dima , C. V. R.; Knop, I. O. Modelagem da Progressão de Dificuldade em Jogos para Mapas Gerados Proceduralmente. 2023. ](http://monografias.ice.ufjf.br/tcc-web/downloadPdf?id=713)
 
+## Instalação
+Após clonar o repositório, basta executar na linha de comando:
+
+```bash
+yarn install
+yarn dev
+```
+
+Para gerar uma versão de produção, basta executar:
+
+```bash
+yarn build
+```
 
 ##  Instruções de uso:
 Uma versão online pode ser acessada [diretamente pelo navegador](https://ufjf-gamelab.github.io/pcglab/MazeRunner.html)

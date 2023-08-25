@@ -1,4 +1,4 @@
-import Sprite from "../../progression/Sprite.js";
+import Sprite from "../progression/Sprite.js";
 
 export default class Button extends Sprite {
   constructor(x, y, w, h, text, useImage = false, imageName = "button") {

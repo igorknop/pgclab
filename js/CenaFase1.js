@@ -1,7 +1,7 @@
 import Cena from "./Cena.js";
 import Mapa from "./Mapa.js";
 import Sprite from "./Sprite.js";
-import modeloMapaFase1 from "../maps/mapa1.js";
+import modeloMapaFase1 from "./maps/mapa1.js";
 
 export default class CenaFase1 extends Cena{
     quandoColidir(a, b){
