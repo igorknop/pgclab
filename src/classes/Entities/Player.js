@@ -236,22 +236,22 @@ export default class Player extends Character {
     controlePorTeclas() {
         const input = this.cena.input;
         // Teclas direcionais
-        if (input.estaPressionado("SETA_CIMA")) { this.direcaoY = -1; this.sentidoMovimento = 0; }
-        if (input.estaPressionado("SETA_DIREITA")) { this.direcaoX = 1; this.sentidoMovimento = 3; }
-        if (input.estaPressionado("SETA_BAIXO")) { this.direcaoY = 1; this.sentidoMovimento = 2; }
-        if (input.estaPressionado("SETA_ESQUERDA")) { this.direcaoX = -1; this.sentidoMovimento = 1; }
+        if (input.isPressed("SETA_CIMA")) { this.direcaoY = -1; this.sentidoMovimento = 0; }
+        if (input.isPressed("SETA_DIREITA")) { this.direcaoX = 1; this.sentidoMovimento = 3; }
+        if (input.isPressed("SETA_BAIXO")) { this.direcaoY = 1; this.sentidoMovimento = 2; }
+        if (input.isPressed("SETA_ESQUERDA")) { this.direcaoX = -1; this.sentidoMovimento = 1; }
 
         // Teclas com ações a mais
-        if (input.estaPressionado("CONTROL")) {
+        if (input.isPressed("CONTROL")) {
             this.realizarAtaque();
         } //else{ this.atacando = 0;}
-        if (input.foiPressionado("SHIFT")) { this.playerVel = 250; } else { this.playerVel = 180 }
+        if (input.wasPressed("SHIFT")) { this.playerVel = 250; } else { this.playerVel = 180 }
 
         // Condição de parada
-        if (input.estaPressionado("SETA_CIMA") === input.estaPressionado("SETA_BAIXO")) { this.direcaoY = 0; }
-        if (input.estaPressionado("SETA_DIREITA") === input.estaPressionado("SETA_ESQUERDA")) { this.direcaoX = 0; }
+        if (input.isPressed("SETA_CIMA") === input.isPressed("SETA_BAIXO")) { this.direcaoY = 0; }
+        if (input.isPressed("SETA_DIREITA") === input.isPressed("SETA_ESQUERDA")) { this.direcaoX = 0; }
 
-        if (input.foiPressionado("SPACE")) {
+        if (input.wasPressed("SPACE")) {
             if (this.cooldownTeleporte == 0) {
                 if (this.level.teleportar()) {
                     this.cooldownTeleporte = 1;

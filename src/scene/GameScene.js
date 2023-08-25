@@ -1,16 +1,16 @@
-import CellularAutomata from '../CellularAutomata.js';
-import { getDebugMode, setDebugMode } from '../DebugMode.js';
-import Hud from "../Hud.js";
-import Level from "../Level.js";
-import { setMapArea } from "../MAPA_AREA.js";
-import Player, { getPlayer, setPlayer } from "../Entities/Player.js";
-import SeedGenerator from "../SeedGenerator.js";
-import Sprite from "../Sprite.js";
-import { converteTelaCheia, escreveTexto } from "../Utils.js";
+import CellularAutomata from '../classes/CellularAutomata.js';
+import { getDebugMode, setDebugMode } from '../classes/DebugMode.js';
+import Hud from "../classes/Hud.js";
+import Level from "../classes/Level.js";
+import { setMapArea } from "../classes/MAPA_AREA.js";
+import Player, { getPlayer, setPlayer } from "../classes/Entities/Player.js";
+import SeedGenerator from "../classes/SeedGenerator.js";
+import Sprite from "../classes/Sprite.js";
+import { converteTelaCheia, escreveTexto } from "../classes/Utils.js";
 import Scene, { fontMainMenu, wordsColor, alignMainMenu } from "./Scene.js";
-import Button from "../utils/Button.js";
-import getXY from '../utils/getXY.js';
-import Debugger, { DEBUG_MODE } from '../utils/Debugger.js';
+import Button from "../classes/utils/Button.js";
+import getXY from '../classes/utils/getXY.js';
+import Debugger, { DEBUG_MODE } from '../classes/utils/Debugger.js';
 let stateMainMenu = 0;
 export default class GameScene extends Scene {
 
@@ -257,7 +257,7 @@ export default class GameScene extends Scene {
             if (this.barraTempo.barraExterna.w <= 0) {
                 this.barraTempo.barraExterna.w = 0;
                 // estado = 5;
-                limparTela();
+                this.clearScreen();
             }
             if (this.levelAtual.colisaoFireZones(getPlayer())) {
                 this.barraTempo.barraExterna.w = this.barraTempo.barraInterna.w;
@@ -322,14 +322,14 @@ export default class GameScene extends Scene {
     }
 
     captureInput() {
-        if (this.input.foiPressionado("M")) {
+        if (this.input.wasPressed("M")) {
             this.hud.bussola.mapMode = this.hud.bussola.mapMode + 1;
             if (this.hud.bussola.mapMode > 3) {
                 this.hud.bussola.mapMode = 0;
             }
             return;
         }
-        if (this.input.foiPressionado("ESC")) {
+        if (this.input.wasPressed("ESC")) {
             this.game.selecionarCena("menuInicial");
             this.clearData();
             this.estado = 1;
@@ -337,21 +337,21 @@ export default class GameScene extends Scene {
         }
 
         // Debug mode
-        if (this.input.foiPressionado("p")) {
+        if (this.input.wasPressed("p")) {
             console.log("Clicou no P");
             Debugger.nextDebugMode();
             this.levelAtual.iniciaRooms();
             return;
         }
         
-        if (this.input.foiPressionado("o")) {
+        if (this.input.wasPressed("o")) {
             Debugger.previousDebugMode();
             this.levelAtual.iniciaRooms();
             return;
         }
         
         // Path
-        if (this.input.foiPressionado("ALTERNA_CAMINHO")) {
+        if (this.input.wasPressed("ALTERNA_CAMINHO")) {
             if (Debugger.isDebugModeOn()) {
                 Debugger.nextPath();
                 this.hud.atualizarGrafico(this.levelAtual);
@@ -359,19 +359,19 @@ export default class GameScene extends Scene {
             return;
         }
 
-        if (this.input.foiPressionado("ALTERNA_GRAFICO")) {
+        if (this.input.wasPressed("ALTERNA_GRAFICO")) {
             if (Debugger.isDebugModeOn()) {
                 this.hud.grafico.alternarModo();
             }
             return;
         }
 
-        if (this.input.foiPressionado("t")) {
+        if (this.input.wasPressed("t")) {
             this.levelAtual.posicionarInimigoDebug();
             return;
         }
 
-        if (this.input.foiPressionado("+")) {
+        if (this.input.wasPressed("+")) {
             if (Debugger.isDebugModeOn()) {
                 this.game.escala = this.game.escala + 0.025;
                 if (this.game.escala >= 0.85)
@@ -389,7 +389,7 @@ export default class GameScene extends Scene {
             }
             return;
         }
-        if (this.input.foiPressionado("-")) {
+        if (this.input.wasPressed("-")) {
             if (Debugger.isDebugModeOn()) {
                 this.game.escala = this.game.escala - 0.025;
                 if (this.game.escala >= 0.85)

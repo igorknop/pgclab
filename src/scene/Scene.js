@@ -1,8 +1,8 @@
 export const fontMainMenu = "30px Arial Black";
 export const wordsColor = "white";
 export const alignMainMenu = "center";
-import Hud from "../Hud.js";
-import getXY from "../utils/getXY.js";
+import Hud from "../classes/Hud.js";
+import getXY from "../classes/utils/getXY.js";
 
 export default class Scene {
     constructor() {

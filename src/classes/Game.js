@@ -1,5 +1,5 @@
-import GameScene from "./Scenes/GameScene.js";
-import MenuScene from "./Scenes/MenuScene.js";
+import GameScene from "../scene/GameScene.js";
+import MenuScene from "../scene/MenuScene.js";
 
 export default class Game {
 

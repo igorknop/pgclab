@@ -1,14 +1,11 @@
-import AssetsManager from "./src/classes/AssetsManager.js";
 import { getDebugMode, setDebugMode } from "./src/classes/DebugMode.js";
 import { getPlayer } from "./src/classes/Entities/Player.js";
 import Game from "./src/classes/Game.js";
 import Level from "./src/classes/Level.js";
 import { setMapArea } from "./src/classes/MAPA_AREA.js";
 import SeedGenerator from "./src/classes/SeedGenerator.js";
-import InputManager from "./src/classes/InputManager.js";
-import { AssetsManagerBuilderLPC } from "./src/classes/AssetsManagerBuilderLPC.js";
-//import Mixer from "./classes/Mixer.js";
-
+import { AssetsManagerBuilderLPC } from "./src/assets/AssetsManagerBuilderLPC.js";
+import InputManagerBuilderLPC from "./src/input/InputManagerBuilderLPC.js";
 
 const tela = document.getElementById("canvas");
 // Switch to fullscreen
@@ -24,33 +21,10 @@ let dt = 0;
 let estado = 1;
 
 
-const input = new InputManager();
-input.configurarTeclado({
-    ArrowLeft: "SETA_ESQUERDA",
-    ArrowRight: "SETA_DIREITA",
-    ArrowUp: "SETA_CIMA",
-    ArrowDown: "SETA_BAIXO",
-    " ": "SPACE",
-    Enter: "ENTER",
-    Control: "CONTROL",
-    Shift: "Shift",
-    m: "m",
-    Escape: "ESC",
-    c: "ALTERNA_CAMINHO",
-    p: "p",
-    o: "o",
-    t: "t",
-    g: "ALTERNA_GRAFICO",
-    Add: "+",
-    Subtract: "-"
-});
 
+const assets = new AssetsManagerBuilderLPC().build();
+const input = new InputManagerBuilderLPC().build();
 
-
-
-
-// Controle das imagens e sons presentes no jogo
-const assetsMng = new AssetsManagerBuilderLPC().build();
 
 
 // SeedGenerator ===> Utilizado para retornar ao mesmo mapa com apenas o código da seed
@@ -120,7 +94,7 @@ let stateMainMenu = 0;
 *       5 => Reiniciar fase;        *
 *                                   *
 *************************************/
-const game = new Game(tela, assetsMng, input);
+const game = new Game(tela, assets, input);
 
 // A cada 1 segundo ele executa uma diminuição na barra de tempo
 function controleTempo() {
@@ -140,7 +114,7 @@ function controleTempo() {
 
 
 function limparDados() {
-    levelAtual = new Level(widthMap, heightMap, sizeMap, { hud, seedGen, assetsMng });
+    levelAtual = new Level(widthMap, heightMap, sizeMap, { hud, seedGen, assetsMng: assets });
     levelAtual.clonarLevel(levels[0]);
     levelAtual.posicionarPlayer(getPlayer());
     levelAtual.setTaxaDiminuicaoTempo(dt, barraTempo.interna);        // Atualiza o decaimento da barra
