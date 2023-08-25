@@ -1,7 +1,7 @@
 export default class AssetsManager {
   constructor() {
-    this.aCarregar = 0;
-    this.carregadas = 0;
+    this.toLoad = 0;
+    this.loaded = 0;
     this.images = {};
     this.audios = {};
     this.channels = [];
@@ -9,22 +9,22 @@ export default class AssetsManager {
     for (let i = 0; i < this.MAX_CHANNELS; i++) {
       this.channels[i] = {
         audio: new Audio(),
-        fim: -1
+        end: -1
       };
     }
   }
 
   loadImage(key, url) {
-    console.log(`Carregando imagem ${url}...`);
+    console.log(`Loading image ${url}...`);
 
-    this.aCarregar++;
-    const imagem = new Image();
-    imagem.src = url;
-    this.images[key] = imagem;
+    this.toLoad++;
+    const image = new Image();
+    image.src = url;
+    this.images[key] = image;
     const that = this;
-    imagem.addEventListener("load", function () {
-      that.carregadas++;
-      console.log(`Imagem ${that.carregadas}/${that.aCarregar} ${key}: ${url} carregada.`);
+    image.addEventListener("load", function () {
+      that.loaded++;
+      console.log(`Image ${that.loaded}/${that.toLoad} ${key}: ${url} loaded.`);
     });
   }
 
@@ -32,14 +32,14 @@ export default class AssetsManager {
     return this.images[key];
   }
 
-  progresso() {
-    if (this.aCarregar != 0) {
-      return this.carregadas / this.aCarregar * 100.0;
+  progress() {
+    if (this.toLoad != 0) {
+      return this.loaded / this.toLoad * 100.0;
     } else return 0.0;
   }
 
   loadAudio(key, url) {
-    console.log(`Carregando audio ${key}: ${url}...`);
+    console.log(`Loading audio ${key}: ${url}...`);
     //this.aCarregar++;
     const audio = new Audio();
     audio.src = url;
@@ -59,13 +59,13 @@ export default class AssetsManager {
 
   play(key) {
     if (!this.audios[key]) {
-      throw new Error(`Chave de audio inválida: ${key}!`);
+      throw new Error(`Invalid audio key: ${key}!`);
     }
     for (let i = 0; i < this.MAX_CHANNELS; i++) {
-      let agora = new Date();
-      if (this.channels[i].fim < agora.getTime()) {
+      let now = new Date();
+      if (this.channels[i].end < now.getTime()) {
         this.channels[i].audio.src = this.audios[key].src;
-        this.channels[i].fim = agora.getTime() + this.audios[key].duration * 1000;
+        this.channels[i].end = now.getTime() + this.audios[key].duration * 1000;
         this.channels[i].audio.play();
         break;
       }
@@ -114,7 +114,7 @@ export default class AssetsManager {
         this.channels[i].audio.pause();
         this.channels[i] = {
           audio: new Audio(),
-          fim: -1
+          end: -1
         };
         break;
       }
