@@ -45,7 +45,7 @@ export default class Treasure extends Sprite {
     desenhar(ctx) {
         ctx.save();
         ctx.translate(this.x, this.y);
-        this.map.assetsMng.drawClip({
+        this.map.assets.drawClip({
             ctx: ctx, key: this.nomeImagem,
             sx: this.animation[Math.floor(this.pose) % this.qtdAnimacoes].sx,
             sy: this.animation[Math.floor(this.pose) % this.qtdAnimacoes].sy,

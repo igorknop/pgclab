@@ -30,7 +30,7 @@ export default class CenaJogo extends Cena {
         if (!getPlayer().vivo) {
             this.estado = 5;
         }
-        this.hud.desenharBotoes(this.ctx, this.assetsMng);
+        this.hud.desenharBotoes(this.ctx, this.assets);
     }
 
     quadro(t) {
@@ -67,9 +67,10 @@ export default class CenaJogo extends Cena {
             this.game.widthMap,
             this.game.heightMap,
             this.game.sizeMap,
-            { hud: this.hud, seedGen: this.seedGen, assetsMng: this.assetsMng }
+            { hud: this.hud, seedGen: this.seedGen, assets: this.assets }
         );
         this.levels.push(this.levelAtual);
+        this.levelAtual.cena = this;
 
         const geraFase = new CellularAutomata({
             HS: this.game.heightMap, WS: this.game.widthMap, MOORE: 1, r: 0.5,
@@ -321,14 +322,14 @@ export default class CenaJogo extends Cena {
     }
 
     capturarInput() {
-        if (this.inputManager.foiPressionado("M")) {
+        if (this.input.foiPressionado("M")) {
             this.hud.bussola.mapMode = this.hud.bussola.mapMode + 1;
             if (this.hud.bussola.mapMode > 3) {
                 this.hud.bussola.mapMode = 0;
             }
             return;
         }
-        if (this.inputManager.foiPressionado("ESC")) {
+        if (this.input.foiPressionado("ESC")) {
             this.game.selecionarCena("menuInicial");
             this.limparDados();
             this.estado = 1;
@@ -336,21 +337,21 @@ export default class CenaJogo extends Cena {
         }
 
         // Debug mode
-        if (this.inputManager.foiPressionado("p")) {
+        if (this.input.foiPressionado("p")) {
             console.log("Clicou no P");
             Debugger.nextDebugMode();
             this.levelAtual.iniciaRooms();
             return;
         }
         
-        if (this.inputManager.foiPressionado("o")) {
+        if (this.input.foiPressionado("o")) {
             Debugger.previousDebugMode();
             this.levelAtual.iniciaRooms();
             return;
         }
         
         // Path
-        if (this.inputManager.foiPressionado("ALTERNA_CAMINHO")) {
+        if (this.input.foiPressionado("ALTERNA_CAMINHO")) {
             if (Debugger.isDebugModeOn()) {
                 Debugger.nextPath();
                 this.hud.atualizarGrafico(this.levelAtual);
@@ -358,19 +359,19 @@ export default class CenaJogo extends Cena {
             return;
         }
 
-        if (this.inputManager.foiPressionado("ALTERNA_GRAFICO")) {
+        if (this.input.foiPressionado("ALTERNA_GRAFICO")) {
             if (Debugger.isDebugModeOn()) {
                 this.hud.grafico.alternarModo();
             }
             return;
         }
 
-        if (this.inputManager.foiPressionado("t")) {
+        if (this.input.foiPressionado("t")) {
             this.levelAtual.posicionarInimigoDebug();
             return;
         }
 
-        if (this.inputManager.foiPressionado("+")) {
+        if (this.input.foiPressionado("+")) {
             if (Debugger.isDebugModeOn()) {
                 this.game.escala = this.game.escala + 0.025;
                 if (this.game.escala >= 0.85)
@@ -388,7 +389,7 @@ export default class CenaJogo extends Cena {
             }
             return;
         }
-        if (this.inputManager.foiPressionado("-")) {
+        if (this.input.foiPressionado("-")) {
             if (Debugger.isDebugModeOn()) {
                 this.game.escala = this.game.escala - 0.025;
                 if (this.game.escala >= 0.85)
@@ -412,7 +413,7 @@ export default class CenaJogo extends Cena {
         this.levelAtual = new Level(this.game.widthMap,
             this.game.heightMap,
             this.game.sizeMap,
-            { hud: this.hud, seedGen: this.seedGen, assetsMng: this.assetsMng }
+            { hud: this.hud, seedGen: this.seedGen, assets: this.assets }
         );
         this.levelAtual.clonarLevel(this.levels[0]);
         this.levelAtual.posicionarPlayer(getPlayer());

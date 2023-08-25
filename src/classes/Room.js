@@ -22,7 +22,9 @@ export default class Room {
 		this.entrada = -1; // Index do bloco de teleporte de entrada do room
 		this.number = number;
 		this.teleporterInitial = new Teleporter(TeleporterType.InicioSala); // (Inicio)Transição de uma sala pra outra
+		this.teleporterInitial.cena = this.cena;
 		this.teleporterFinal = new Teleporter(TeleporterType.FimSala); // (Chegada)Transição de uma sala pra outra
+		this.teleporterInitial.cena = this.cena;
 		this.endingLevel; // Teleportador que termina a fase
 		this.beginLevel; // Teleportador que Inicia a fase
 		this.fireZones = []; // Area para a recarga do tempo

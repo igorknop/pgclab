@@ -57,13 +57,13 @@ export default class FireZone extends Sprite {
         ctx.globalAlpha = 1.00;         //Transparência
 
         //ctx, key, sx, sy, w, h, dx, dy
-        /*assetsMng.drawClip({ctx: ctx, key: "flames", 
+        /*assets.drawClip({ctx: ctx, key: "flames", 
             sx: (Math.floor(this.pose) * 16),
             sy: 0,
             w: 16, h: 24, dx: -8,  
             dy: -12
         });*/
-        this.map.assetsMng.drawClip({
+        this.map.assets.drawClip({
             ctx: ctx, key: this.nomeImagem,
             sx: this.animation[Math.floor(this.pose) % this.qtdAnimacoes].sx,
             sy: this.animation[Math.floor(this.pose) % this.qtdAnimacoes].sy,

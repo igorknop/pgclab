@@ -173,7 +173,7 @@ export default class CellularAutomata {
         return this.seedGen.nextRandInt(min, max);
     }
 
-    /*setTeleporters (){
+    setTeleporters (){
         let indAvaliableRoom;
         let indFinishRoom;
         let roomsAvaliable = [];            //Rooms avaliable to choose initial teleporter 
@@ -269,7 +269,7 @@ export default class CellularAutomata {
         for(let i = 0; i < this.rooms.length; i++){
             console.log("B( "+ this.rooms[i].teleporterFinal.startIDRoom +" ) -> A( " + this.rooms[i].teleporterFinal.finishIDRoom  + " )");
         }
-    }*/
+    }
 
     visitCells(auxMatrix, mapx, y, x, tp, d = 1, indexArea) {   //visita as celulas vizinhas de maneira recursiva e atribui o código da sala correspondente 
         /*********************************************

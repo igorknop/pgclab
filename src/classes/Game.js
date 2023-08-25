@@ -3,10 +3,10 @@ import CenaMenu from "./Cenas/CenaMenu.js";
 
 export default class Game {
 
-    constructor(canvas, assetsMng, inputManager) {
+    constructor(canvas, assets, inputManager) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
-        this.assetsMng = assetsMng;
+        this.assets = assets;
         this.inputManager = inputManager;
         this.cenas = new Map();
         this.cenaAtual = null;
@@ -26,11 +26,10 @@ export default class Game {
     adicionarCena(chave, cena) {
         this.cenas.set(chave, cena);
         cena.game = this;
+        cena.assets = this.assets;
         cena.canvas = this.canvas;
-
         cena.ctx = this.ctx;
-        cena.assetsMng = this.assetsMng;
-        cena.inputManager = this.inputManager;
+        cena.input = this.inputManager;
         if (this.cenaAtual === null) {
             this.cenaAtual = cena;
         }

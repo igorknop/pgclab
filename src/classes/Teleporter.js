@@ -12,6 +12,7 @@ export default class Teleporter extends Sprite {
 		this.type = type;
 		this.roomNumber = -1;
 		this.ativo = true;
+		this.cena = null;
 	}
 
 	/**
@@ -80,7 +81,7 @@ export default class Teleporter extends Sprite {
 			return;
 		}
 		if (this.proximoTeleporte != undefined) {
-			this.cena.assetsMng.play("teleporte");
+			this.map.assets.play("teleporte");
 			player.x = this.proximoTeleporte.x;
 			player.y = this.proximoTeleporte.y;
 			player.gx = this.proximoTeleporte.gx;

@@ -5,11 +5,12 @@ import Hud from "../Hud.js";
 import getXY from "../utils/getXY.js";
 
 export default class Cena {
-    constructor(canvas = null, assets = null) {
-        this.canvas = canvas;
-        this.ctx = canvas?.getContext("2d");
-        this.assets = assets;
+    constructor() {
         this.game = null;
+        this.assets = null;
+        this.canvas = null;
+        this.ctx = null;
+        this.input = null;
     }
 
     desenhar() {

@@ -25,14 +25,14 @@ export default class CenaMenu extends Cena {
     quadro(t) {
         super.quadro(t);
         if (this.estadoMenu === 0) {
-            if (this.inputManager.foiPressionado("ENTER")) {
+            if (this.input.foiPressionado("ENTER")) {
                 this.game.selecionarCena("jogo");
                 return;
             }
         }
-        if (this.inputManager.foiPressionado("SETA_BAIXO")) {
+        if (this.input.foiPressionado("SETA_BAIXO")) {
             this.estadoMenu = 1;
-        } else if (this.inputManager.foiPressionado("SETA_CIMA")) {
+        } else if (this.input.foiPressionado("SETA_CIMA")) {
             this.estadoMenu = 0;
         }
     }

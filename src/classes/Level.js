@@ -14,8 +14,8 @@ import EnemyPositioningManager from "./EnemyPositioningManager.js";
 //TODO Fix parametro
 export default class Level {
 
-  constructor(w, h, s, { hud, seedGen, assetsMng }) {
-    this.mapa = new Map(w, h, s, assetsMng);
+  constructor(w, h, s, { hud, seedGen, assets: assets }) {
+    this.mapa = new Map(w, h, s, assets);
     this.progressionManager = new ProgressionManager();
     this.treasurePositioningManager = new TreasurePositioningManager(seedGen, this.mapa);
     this.enemyPositioningManager = new EnemyPositioningManager(seedGen, this.mapa);
@@ -27,7 +27,9 @@ export default class Level {
     this.tamanhoSalasMinimo = 25;
     this.larguraBarra = 127;
     this.teleporteInicioLevel = new Teleporter(TeleporterType.InicioLevel);         //(Inicio) mapa
+    this.teleporteInicioLevel.cena = this.cena;
     this.teleporteFinalLevel = new Teleporter(TeleporterType.FimLevel);        //(Final) mapa
+    this.teleporteFinalLevel.cena = this.cena;
     this.player = undefined;
     this.hud = hud;
     this.seedGen = seedGen;
@@ -95,8 +97,10 @@ export default class Level {
   copiaSalas(rooms) {
     this.rooms = [];
     for (let i = 0; i < rooms.length; i++) {
-      this.rooms.push(new Room(0));
-      this.rooms[this.rooms.length - 1].copyByLevelGeneration(rooms[i], this.mapa);
+      const room = new Room(0)
+      this.rooms.push(room);
+      room.copyByLevelGeneration(rooms[i], this.mapa);
+      room.cena = this.cena;
     }
   }
 
@@ -104,15 +108,18 @@ export default class Level {
     this.rooms = [];
     //console.log("COPIA SALAS COM REFERENCIA:");
     for (let i = 0; i < rooms.length; i++) {
-      this.rooms.push(new Room(0));
-      this.rooms[this.rooms.length - 1].copyWithReference(rooms[i], this.mapa);
+      const room = new Room(0)
+      this.rooms.push(room);
+      room.copyWithReference(rooms[i], this.mapa);
       // Passado o vetor de rooms para poder clonar o teleporte para a proxima sala
+      room.cena = this.cena;
     }
 
     // Copia as referencias do proximo teleporte
     for (let i = 0; i < this.rooms.length; i++) {
       this.rooms[i].teleporterInitial.copyConnection(rooms[i].teleporterInitial, this.rooms);
       this.rooms[i].teleporterFinal.copyConnection(rooms[i].teleporterFinal, this.rooms);
+      this.rooms[i].cena = this.cena;
     }
   }
 
@@ -261,13 +268,14 @@ export default class Level {
     let criterio = Math.floor((porcentagem * maxDist) / 100);   // Porcentagem da distancia maxima
     let celulas = room.getCellsByDist(criterio, 0);    // Listagem de celulas dentro do criterio de escolha para o teleporte
     let sortPosition = this.getRandomInt(0, (celulas.length - 1));
-    let teleporte = new Teleporter();
+    const teleporte = new Teleporter();
     teleporte.setPosition(celulas[sortPosition]);
     teleporte.roomNumber = celulas[sortPosition].room;
     teleporte.gy = celulas[sortPosition].linha;
     teleporte.gx = celulas[sortPosition].coluna;
     teleporte.map = this.mapa;
     this.mapa.atualizaDist(teleporte.gy, teleporte.gx, 0, 'distTeleportes');     // Atualiza distancia dos teleportes
+    teleporte.cena = this.cena;
     return teleporte;
   }
 

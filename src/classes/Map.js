@@ -4,12 +4,12 @@ import { getPlayer } from "./Entities/Player.js";
 import Debugger, { DEBUG_MODE } from "./utils/Debugger.js";
 
 export default class Map {
-  constructor(w, h, s, assetsMng) {
+  constructor(w, h, s, assets) {
     this.w = w;
     this.h = h;
     this.s = s;
     this.cell = [];
-    this.assetsMng = assetsMng;
+    this.assets = assets;
     for (let l = 0; l < h; l++) {
       this.cell[l] = [];
       for (let c = 0; c < w; c++) {
@@ -251,19 +251,19 @@ export default class Map {
       for (let c = Math.max(0, player.gx - getMapArea()); c < Math.min(this.w, player.gx + getMapArea()); c++) {
         switch (this.cell[l][c].tipo) {
           case 0:   // Vazio     -- Chão
-            this.assetsMng.drawSize({
+            this.assets.drawSize({
               ctx: ctx, key: "floor_sand", x: (c * this.s),
               y: (l * this.s), w: this.s, h: this.s
             });
             break;
           case 1:   // Bloqueado -- Muro
-            this.assetsMng.drawSize({
+            this.assets.drawSize({
               ctx: ctx, key: "brick_gray", x: (c * this.s),
               y: (l * this.s), w: this.s, h: this.s
             });
             break;
           case 2:   // Caverna
-            this.assetsMng.drawClipSize({
+            this.assets.drawClipSize({
               ctx: ctx, key: "rockBlock", sx: 0, sy: 0, w: 32, h: 32,
               dx: (c * this.s), dy: (l * this.s), dw: this.s, dh: this.s
             });

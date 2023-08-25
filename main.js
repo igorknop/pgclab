@@ -6,6 +6,7 @@ import Level from "./src/classes/Level.js";
 import { setMapArea } from "./src/classes/MAPA_AREA.js";
 import SeedGenerator from "./src/classes/SeedGenerator.js";
 import InputManager from "./src/classes/InputManager.js";
+import { AssetsManagerBuilderLPC } from "./src/classes/AssetsManagerBuilderLPC.js";
 //import Mixer from "./classes/Mixer.js";
 
 
@@ -49,15 +50,8 @@ input.configurarTeclado({
 
 
 // Controle das imagens e sons presentes no jogo
-var assetsMngBuilder = new AssetsManagerBuilderLPC();
-assetsMngBuilder.reset();
-var assetsMng = assetsMngBuilder.build();
+const assetsMng = new AssetsManagerBuilderLPC().build();
 
-// Carregamento dos audios presentes no jogo
-import audioTeleport from "./assets/audios/Teleport.wav";
-import { AssetsManagerBuilder } from "./src/classes/AssetsManagerBuilder.js";
-import { AssetsManagerBuilderLPC } from "./src/classes/AssetsManagerBuilderLPC.js";
-assetsMng.loadAudio("teleporte", audioTeleport);
 
 // SeedGenerator ===> Utilizado para retornar ao mesmo mapa com apenas o código da seed
 let seedValueURL = location.search;

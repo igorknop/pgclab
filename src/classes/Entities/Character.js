@@ -215,7 +215,7 @@ export default class Character extends Sprite {
         else {
             this.imune = false;
         }
-        this.map.assetsMng.drawClip({
+        this.map.assets.drawClip({
             ctx: ctx, key: this.nomeImagem,
             sx: this.animation[this.type].animationFrame[Math.floor(this.pose) % this.animation[this.type].qtdFrames].sx,
             sy: this.animation[this.type].animationFrame[Math.floor(this.pose) % this.animation[this.type].qtdFrames].sy,

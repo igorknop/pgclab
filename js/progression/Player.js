@@ -356,7 +356,7 @@ export default class Player extends Sprite {
     } else {
       this.imune = false;
     }
-    assetsMng.drawClipSize({
+    this.assets.drawClipSize({
       ctx: ctx,
       key: this.nomeImagem,
       sx: auxAnimation.animationFrame[
